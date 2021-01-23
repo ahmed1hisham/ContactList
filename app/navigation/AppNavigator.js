@@ -3,12 +3,19 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ContactListScreen from '../screens/ContactListScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {enableScreens} from 'react-native-screens';
+
+enableScreens();
 
 const Tab = createBottomTabNavigator();
 
-const AppNavigator = () => {
+const AppNavigator = (props) => {
   return (
-    <Tab.Navigator initialRouteName="Home">
+    <Tab.Navigator
+      initialRouteName="Home"
+      tabBarOptions={{
+        keyboardHidesTabBar: true,
+      }}>
       <Tab.Screen
         name="Contacts"
         component={ContactListScreen}

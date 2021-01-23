@@ -1,6 +1,16 @@
 import {createStore} from 'redux';
 import AppReducer from '../reducers/AppReducer';
+import {persistStore, persistReducer} from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
 
-let store = createStore(AppReducer);
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+};
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, AppReducer);
+
+let store = createStore(persistedReducer);
+let persistor = persistStore(store);
+
+export {store, persistor};
